@@ -8,13 +8,13 @@ const context = require("sm-express-server/context");
 const { methodsMap } = require("sm-express-server/constants");
 
 
-function Server(port = 4000, direction = "./", use = []) {
+function Server(port = 4000, direction = "/", use = []) {
     /**@type {Controller[]} */
     this.controllers = [];
     this.port = process.env.PORT || port;
     this.direction = direction;
     this.app = express();
-    this.pdp = path.join(__dirname, this.direction);
+    this.pdp = path.join(__dirname, "../.." + this.direction ? this.direction : "/");
     this.app.use(cors());
     this.app.use(express.static(this.pdp));
     use.forEach((u) => {
