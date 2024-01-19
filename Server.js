@@ -14,7 +14,7 @@ function Server(port = 4000, direction = "/", use = []) {
     this.port = process.env.PORT || port;
     this.direction = direction;
     this.app = express();
-    this.pdp = path.join(__dirname, "../.." + this.direction ? this.direction : "/");
+    this.pdp = path.join(__dirname, "../.." + this.direction);
     this.app.use(cors());
     this.app.use(express.static(this.pdp));
     use.forEach((u) => {
