@@ -15,7 +15,7 @@ function storage(fileDirection = "./") {
             cd(null, file.originalname);
         }
     })
-    return multer({ storage: this.storage });
+    return multer({ storage });
 }
 
 module.exports = storage;
