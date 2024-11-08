@@ -6,7 +6,7 @@ const multer = require("multer");
  * @returns {multer.Multer}
  */
 
-function storage(fileDirection = "./") {
+function createStorage(fileDirection = "./") {
     const storage = multer.diskStorage({
         destination: (req, file, cd) => {
             cd(null, fileDirection);
@@ -18,4 +18,4 @@ function storage(fileDirection = "./") {
     return multer({ storage });
 }
 
-module.exports = storage;
+module.exports = createStorage;
