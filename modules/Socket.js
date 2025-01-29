@@ -22,9 +22,9 @@ function SocketIo(server, originCors = "*", socketControllers = []) {
 
 function createSocketController(name = "newSocketController", callback = (...args) => {}, broadcast = false) {
     return {
-        name: "data",
-        callback: callback,
-        broadcast: broadcast,
+        name,
+        callback,
+        broadcast,
     };
 }
 
