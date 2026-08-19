@@ -25,7 +25,19 @@ function Server(port = 4000, direction = "/", use = [], routers = [], controller
     this.direction = direction;
     this.app = express();
     this.pdp = this.direction;
-    this.app.use(cors());
+    this.app.use(cors({
+        origin: function (origin, cb) {
+            if (!origin) return cb(null, true); // curl/SSR/same-origin
+            try {
+                var u = new URL(origin);
+                var h = u.hostname;
+                var ok = (u.protocol === "https:" && (h === "sinul.es" || h.endsWith(".sinul.es")))
+                    || h === "localhost" || h === "127.0.0.1";
+                return cb(null, ok);
+            } catch (e) { return cb(null, false); }
+        },
+        credentials: true,
+    }));
     this.app.use(express.static(this.pdp));
     use.forEach((u) => {
         this.app.use(u);
